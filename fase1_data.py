@@ -8,6 +8,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 from xgboost import XGBClassifier
 
+
+# ──────────────────────────────────────────────
+#  1. CARREGAMENTO DE DADOS
+# ──────────────────────────────────────────────
+
+
 def load_all_files(folder="data/raw"):
     parquet_files = glob.glob(f"{folder}/*.parquet")
     csv_files = glob.glob(f"{folder}/*.csv")
@@ -37,6 +43,10 @@ def load_all_files(folder="data/raw"):
 df = load_all_files("data/raw")
 
 
+# ──────────────────────────────────────────────
+#  2. FILTRAGEM E AMOSTRAGEM
+# ──────────────────────────────────────────────
+
 
 ATTACK_KEYWORDS = ["DDoS", "Brute Force", "Bruteforce", "DoS", "Bot"]
 RANDOM_STATE = 42
@@ -62,7 +72,9 @@ sampled = pd.concat([benign_sample, attack_sample], ignore_index=True)
 sampled = sampled.sample(frac=1, random_state=RANDOM_STATE).reset_index(drop=True)
 
 
-
+# ──────────────────────────────────────────────
+#  3. PRÉ-PROCESSAMENTO
+# ──────────────────────────────────────────────
 
 
 # Criar target (0=benigno, 1=ataque)
@@ -84,8 +96,9 @@ X = X.reset_index(drop=True)
 y = y.reset_index(drop=True)
 
 
-
-
+# ──────────────────────────────────────────────
+#  4. SELEÇÃO DE FEATURES (Random Forest)
+# ──────────────────────────────────────────────
 
 
 rf = RandomForestClassifier(
@@ -108,8 +121,9 @@ importance.to_csv("data/processed/feature_importance.csv", header=["importance"]
 joblib.dump(top15, "models/top15_features.pkl")
 
 
-
-
+# ──────────────────────────────────────────────
+#  5. NORMALIZAÇÃO (MinMaxScaler)
+# ──────────────────────────────────────────────
 
 
 scaler = MinMaxScaler()
@@ -127,9 +141,9 @@ final_df["target"] = y.values
 final_df.to_csv("data/processed/cicids2018_clean_top15.csv", index=False)
 
 
-
-
-
+# ──────────────────────────────────────────────
+#  6. TREINO DO MODELO (XGBoost)
+# ──────────────────────────────────────────────
 
 
 X_train, X_test, y_train, y_test = train_test_split(
@@ -159,6 +173,9 @@ print(classification_report(y_test, y_pred,
       target_names=["Benign", "Attack"]))
 
 
+# ──────────────────────────────────────────────
+#  7. GUARDAR ARTEFACTOS
+# ──────────────────────────────────────────────
 
 
 # Guardar modelo
