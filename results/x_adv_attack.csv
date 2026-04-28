@@ -1,0 +1,2 @@
+Init Bwd Win Bytes,Init Fwd Win Bytes,Fwd Packets Length Total,Fwd Packet Length Max,Subflow Fwd Bytes,Flow IAT Mean,Bwd IAT Min,Fwd IAT Std,Fwd IAT Total,Fwd Header Length,Flow Duration,Total Fwd Packets,Fwd Seg Size Min,Avg Fwd Segment Size,Fwd IAT Min
+0.0,0.07501526,0.050002724,0.056006007,0.050002724,0.0,0.05000021,0.050001588,0.05000271,0.050039224,0.060862534,0.050008718,0.36666664,0.054566212,0.05000057

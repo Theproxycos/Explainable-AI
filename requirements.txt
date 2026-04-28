@@ -4,3 +4,8 @@ scikit-learn
 joblib
 xgboost
 pyarrow
+shap
+lime
+matplotlib
+torch
+adversarial-robustness-toolbox

@@ -173,7 +173,7 @@ speedup = lime_mean_ms / shap_mean_ms
 ax.text(
     0.98,
     0.95,
-    f"SHAP é {speedup:.0f}x mais rápido",
+    f"SHAP is {speedup:.0f} Times Faster",
     transform = ax.transAxes,
     ha = "right",
     va = "top",
@@ -188,12 +188,12 @@ ax.text(
 
 # Formata os títulos, cores de texto dos eixos e introduz uma grelha horizontal para melhor visualização dos valores.
 ax.set_ylabel(
-    "Latência média (ms)", 
+    "Average Latency (ms)", 
     color = "#e6edf3"
 )
 
 ax.set_title(
-    "Tempo de explicação por pacote: SHAP vs LIME",
+    "Explanation Time per Package: SHAP vs LIME",
     color = "#e6edf3", 
     fontweight = "bold"
 )
